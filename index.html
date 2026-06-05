@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A Baby is Blooming — you're warmly invited to our baby shower." />
+  <title>A Baby is Blooming · Baby Shower Invitation</title>
+
+  <!-- Fonts: elegant serif + romantic script -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Marcellus&family=Parisienne&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- ===== Loader / curtain ===== -->
+  <div class="loader" id="loader" aria-hidden="true">
+    <span class="loader__heart h1">♥</span>
+    <span class="loader__heart h2">✿</span>
+    <span class="loader__heart h3">♥</span>
+    <span class="loader__heart h4">✿</span>
+    <span class="loader__heart h5">★</span>
+    <div class="loader__bloom">
+      <svg viewBox="0 0 100 100" class="loader__flower">
+        <g fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
+          <path class="lp" d="M50 50 C50 30, 38 22, 50 10 C62 22, 50 30, 50 50" />
+          <path class="lp" d="M50 50 C68 44, 80 50, 90 38 C76 32, 62 40, 50 50" />
+          <path class="lp" d="M50 50 C66 64, 64 78, 76 86 C72 70, 60 60, 50 50" />
+          <path class="lp" d="M50 50 C40 68, 26 70, 24 84 C36 76, 46 64, 50 50" />
+          <path class="lp" d="M50 50 C32 46, 20 52, 12 42 C24 36, 40 42, 50 50" />
+        </g>
+        <circle cx="50" cy="50" r="4.5" class="loader__core" />
+      </svg>
+    </div>
+    <p class="loader__text">A Baby is Blooming</p>
+    <p class="loader__sub">Please join us to celebrate 🌿</p>
+  </div>
+
+  <!-- ===== Animated background layers ===== -->
+  <div class="bg-watercolor" aria-hidden="true">
+    <span class="blob blob--1"></span>
+    <span class="blob blob--2"></span>
+    <span class="blob blob--3"></span>
+    <span class="blob blob--4"></span>
+  </div>
+  <canvas id="petals" class="petals-canvas" aria-hidden="true"></canvas>
+
+  <!-- Floating baby-themed icons (populated by JS) -->
+  <div class="baby-layer" id="babyLayer" aria-hidden="true"></div>
+
+  <!-- Growing vine that draws as you scroll -->
+  <svg class="scroll-vine" viewBox="0 0 120 1400" preserveAspectRatio="none" aria-hidden="true">
+    <path id="vinePath"
+      d="M60 0
+         C 20 120, 100 220, 50 360
+         C 10 480, 95 600, 55 760
+         C 20 900, 100 1020, 50 1180
+         C 25 1290, 70 1340, 60 1400"
+      fill="none" stroke="url(#vineGrad)" stroke-width="2.4" stroke-linecap="round" />
+    <defs>
+      <linearGradient id="vineGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#9fb389" />
+        <stop offset="1" stop-color="#c98e86" />
+      </linearGradient>
+    </defs>
+  </svg>
+
+  <!-- Scroll progress petal -->
+  <div class="progress-rail" aria-hidden="true"><span class="progress-bud" id="progressBud"></span></div>
+
+  <main>
+    <!-- ============ HERO ============ -->
+    <header class="hero" id="home">
+      <div class="hero__florals" aria-hidden="true">
+        <!-- top-left hand-drawn branch (draws itself) -->
+        <svg class="branch branch--tl" viewBox="0 0 300 300">
+          <g fill="none" stroke="#8a9a7b" stroke-width="2" stroke-linecap="round" class="draw">
+            <path d="M10 10 C 80 60, 120 120, 150 210" />
+            <path d="M70 55 C 50 40, 30 45, 18 30" />
+            <path d="M100 95 C 130 80, 150 88, 170 70" />
+            <path d="M125 150 C 100 140, 80 150, 60 138" />
+          </g>
+          <g class="bloom-group">
+            <circle cx="18" cy="30" r="7" class="leaf-dot d1" />
+            <circle cx="170" cy="70" r="9" class="leaf-dot d2" />
+            <circle cx="60" cy="138" r="7" class="leaf-dot d3" />
+            <circle cx="150" cy="210" r="12" class="leaf-dot d4 accent" />
+          </g>
+        </svg>
+        <svg class="branch branch--br" viewBox="0 0 300 300">
+          <g fill="none" stroke="#c98e86" stroke-width="2" stroke-linecap="round" class="draw">
+            <path d="M290 290 C 220 240, 180 180, 150 90" />
+            <path d="M230 245 C 250 260, 270 255, 282 270" />
+            <path d="M200 195 C 170 210, 150 202, 130 220" />
+          </g>
+          <g class="bloom-group">
+            <circle cx="282" cy="270" r="8" class="leaf-dot d2" />
+            <circle cx="130" cy="220" r="7" class="leaf-dot d3" />
+            <circle cx="150" cy="90" r="12" class="leaf-dot d4 accent" />
+          </g>
+        </svg>
+      </div>
+
+      <div class="hero__inner">
+        <p class="hero__eyebrow reveal-up">Please join us for a</p>
+        <h1 class="hero__title">
+          <span class="word">Baby</span>
+          <span class="word script">Shower</span>
+        </h1>
+        <p class="hero__sub reveal-up" data-delay="2">in honour of</p>
+        <p class="hero__names" id="heroNames">Sarah &amp; James</p>
+        <p class="hero__tag reveal-up" data-delay="5">A little one is on the way 🌿</p>
+        <a href="#details" class="hero__scroll" aria-label="Scroll to details">
+          <span class="hero__scroll-text">discover</span>
+          <span class="hero__scroll-dot"></span>
+        </a>
+      </div>
+    </header>
+
+    <!-- ============ ANNOUNCEMENT ============ -->
+    <section class="announce" id="announce">
+      <div class="announce__card reveal">
+        <span class="announce__ornament" aria-hidden="true">❧</span>
+        <p class="announce__quote" id="announceQuote">
+          “A baby fills a place in your heart that you never knew was empty.”
+        </p>
+        <p class="announce__by reveal-up">With love and joyful anticipation, we invite you to
+          celebrate the newest little blossom about to bloom into our family.</p>
+      </div>
+    </section>
+
+    <!-- ============ COUNTDOWN ============ -->
+    <section class="countdown" id="countdown">
+      <h2 class="section-title reveal">Counting down the days</h2>
+      <div class="countdown__grid" id="countdownGrid">
+        <div class="cd-unit reveal-up"><span class="cd-num" data-unit="days">00</span><span class="cd-label">Days</span></div>
+        <div class="cd-unit reveal-up" data-delay="1"><span class="cd-num" data-unit="hours">00</span><span class="cd-label">Hours</span></div>
+        <div class="cd-unit reveal-up" data-delay="2"><span class="cd-num" data-unit="minutes">00</span><span class="cd-label">Minutes</span></div>
+        <div class="cd-unit reveal-up" data-delay="3"><span class="cd-num" data-unit="seconds">00</span><span class="cd-label">Seconds</span></div>
+      </div>
+    </section>
+
+    <!-- ============ DETAILS ============ -->
+    <section class="details" id="details">
+      <h2 class="section-title reveal">The Details</h2>
+      <div class="details__grid">
+        <article class="detail-card reveal-up">
+          <div class="detail-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 64 64"><use href="#ic-calendar"/></svg>
+          </div>
+          <h3>When</h3>
+          <p class="detail-card__lead" id="detailDate">Saturday, July 18th</p>
+          <p class="detail-card__sub" id="detailTime">2:00 PM in the afternoon</p>
+        </article>
+
+        <article class="detail-card reveal-up" data-delay="2">
+          <div class="detail-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 64 64"><use href="#ic-pin"/></svg>
+          </div>
+          <h3>Where</h3>
+          <p class="detail-card__lead" id="detailVenue">The Garden Pavilion</p>
+          <p class="detail-card__sub" id="detailAddress">124 Rose Lane, Springfield</p>
+          <a class="detail-card__link" id="detailMap" href="#" target="_blank" rel="noopener">View map →</a>
+        </article>
+
+        <article class="detail-card reveal-up" data-delay="4">
+          <div class="detail-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 64 64"><use href="#ic-gift"/></svg>
+          </div>
+          <h3>Gifts</h3>
+          <p class="detail-card__lead" id="detailGiftLead">Your presence is the present</p>
+          <p class="detail-card__sub" id="detailGiftSub">…but if you wish, a little something for the registry.</p>
+          <a class="detail-card__link" id="detailRegistry" href="#" target="_blank" rel="noopener">View registry →</a>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ RSVP ============ -->
+    <section class="rsvp" id="rsvp">
+      <div class="rsvp__inner">
+        <h2 class="section-title reveal">Will you join us?</h2>
+        <p class="rsvp__note reveal-up" id="rsvpNote">Kindly reply by July 4th so we can save you a seat in the garden.</p>
+
+        <form class="rsvp__form reveal-up" id="rsvpForm" data-delay="2" novalidate>
+          <div class="field">
+            <input type="text" id="guestName" name="guestName" required placeholder=" " autocomplete="name" />
+            <label for="guestName">Your name</label>
+            <span class="field__line"></span>
+          </div>
+
+          <div class="field field--row">
+            <div class="field field--select">
+              <select id="attending" name="attending" required>
+                <option value="" disabled selected hidden></option>
+                <option value="Joyfully accepts">Joyfully accepts 🌸</option>
+                <option value="Regretfully declines">Regretfully declines</option>
+              </select>
+              <label for="attending">Will you attend?</label>
+              <span class="field__line"></span>
+            </div>
+
+            <div class="field field--count">
+              <input type="number" id="guests" name="guests" min="1" max="10" value="1" placeholder=" " />
+              <label for="guests">Guests</label>
+              <span class="field__line"></span>
+            </div>
+          </div>
+
+          <div class="field">
+            <textarea id="message" name="message" rows="3" placeholder=" "></textarea>
+            <label for="message">A note for the parents-to-be (optional)</label>
+            <span class="field__line"></span>
+          </div>
+
+          <button type="submit" class="rsvp__btn">
+            <span class="rsvp__btn-text">Send my RSVP</span>
+            <span class="rsvp__btn-bloom" aria-hidden="true"></span>
+          </button>
+          <p class="rsvp__hint" id="rsvpHint" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+
+    <!-- ============ FOOTER ============ -->
+    <footer class="footer">
+      <svg class="footer__divider" viewBox="0 0 240 40" aria-hidden="true">
+        <path d="M10 20 H95" stroke="#c98e86" stroke-width="1.4" />
+        <path d="M145 20 H230" stroke="#c98e86" stroke-width="1.4" />
+        <circle cx="120" cy="20" r="9" fill="none" stroke="#8a9a7b" stroke-width="1.4"/>
+        <circle cx="120" cy="20" r="3" fill="#c98e86"/>
+      </svg>
+      <p class="footer__msg">We can't wait to celebrate with you.</p>
+      <p class="footer__names" id="footerNames">Sarah &amp; James</p>
+      <p class="footer__credit">Made with love 🌿</p>
+    </footer>
+  </main>
+
+  <!-- ===== Inline SVG icon sprite ===== -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <g id="ic-calendar" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="10" y="14" width="44" height="40" rx="6"/>
+        <path d="M10 26 H54 M20 8 V18 M44 8 V18"/>
+        <circle cx="32" cy="40" r="4" fill="currentColor" stroke="none"/>
+      </g>
+      <g id="ic-pin" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M32 56 C 32 56, 50 38, 50 26 A18 18 0 1 0 14 26 C 14 38, 32 56, 32 56 Z"/>
+        <circle cx="32" cy="26" r="6"/>
+      </g>
+      <g id="ic-gift" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="12" y="26" width="40" height="28" rx="4"/>
+        <path d="M8 26 H56 V36 H8 Z M32 26 V54"/>
+        <path d="M32 26 C 26 26, 18 22, 22 16 C 26 12, 32 20, 32 26 C 32 20, 38 12, 42 16 C 46 22, 38 26, 32 26 Z"/>
+      </g>
+    </defs>
+  </svg>
+
+  <script src="script.js"></script>
+</body>
+</html>
