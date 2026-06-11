@@ -5,7 +5,7 @@
    ========================================================= */
 
 const CONFIG = {
-  parents:    "Sarah & James",
+  parents:    "Sanduni & Kasun",
   headline:   { line1: "Baby", line2: "Shower" }, // line2 is in script font
   honourText: "in honour of",
   tagline:    "A little one is on the way 🌿",
